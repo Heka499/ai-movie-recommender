@@ -8,7 +8,7 @@ import { OpenAIStream, StreamingTextResponse } from "ai"
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const messages: ChatCompletionMessage[] = body.message;
+        const messages: ChatCompletionMessage[] = body.messages;
 
         const messagesTruncated = messages.slice(-6);
         console.log('Messages:', messagesTruncated);
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
         const vectorQueryResponse = await notesIndex.query({
             vector: embedding,
-            topK: 1,
+            topK: 4,
             filter: {userId}
         });
 
