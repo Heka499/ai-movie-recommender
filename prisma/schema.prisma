@@ -23,3 +23,21 @@ model Note {
 
   @@map("notes")
 }
+
+model Movie {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  movieId     String
+  title       String
+  releaseDate DateTime
+  posterPath  String
+
+  @@map("movies")
+}
+
+model Watchlist {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String
+  movies      String[]
+  
+  @@map("watchlists")
+}
