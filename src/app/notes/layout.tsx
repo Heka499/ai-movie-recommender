@@ -1,14 +1,10 @@
-import NavBar from './NavBar';
+import NavBar from "@/app/NavBar";
 
-export default function Layout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    return ( 
-      <>
-        <NavBar />
-        <main className='p-4 max-w-7xl m-auto'>{children}</main>
-      </>
-    );
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <NavBar />
+      <main className="m-auto max-w-7xl p-4">{children}</main>
+    </>
+  );
 }

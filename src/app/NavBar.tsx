@@ -22,10 +22,18 @@ export default function NavBar() {
     <>
       <div className="p-4 shadow">
         <div className="m-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
-          <Link href="/notes" className="flex items-center gap-1">
-            <Image src={logo} alt="logo" width={40} height={40} />
-            <span className="font-bold">AI movie recommendation system</span>
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center gap-1">
+              <Image src={logo} alt="logo" width={40} height={40} />
+              <span className="font-bold">AI movie recommendation system</span>
+            </Link>
+            <Link href="/notes" className="flex items-center gap-1">
+              <span>Notes</span>
+            </Link>
+            <Link href="/movies" className="flex items-center gap-1">
+              <span>Movies</span>
+            </Link>
+          </div>
           <div className="flex items-center gap-2">
             <UserButton
               afterSignOutUrl="/"
