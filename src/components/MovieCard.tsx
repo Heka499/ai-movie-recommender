@@ -1,10 +1,15 @@
 import Image from "next/image";
+import { Movie as MovieModel } from "@prisma/client";
 
-export default function MovieCard({ movie }) {
+interface MovieCardProps {
+  movie: MovieModel;
+}
+
+export default function MovieCard({ movie }: MovieCardProps) {
   return (
     <div className="flex flex-col items-center gap-4">
       <Image
-        src={movie.poster_path}
+        src={movie.posterPath}
         alt="movie"
         className="rounded-lg"
         width={500}
@@ -12,7 +17,6 @@ export default function MovieCard({ movie }) {
       />
       <div className="flex flex-col items-center gap-2">
         <span className="text-xl font-bold">{movie.title}</span>
-        <span className="text-center text-sm">{movie.overview}</span>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const movies = [
   {
     title: "The Shawshank Redemption",
     overview: "Framed in the 1940s for the",
-    poster_path: logo,
+    posterPath: logo,
     id: 278,
     release_date: "1994-09-23",
     vote_average: 8.7,
@@ -21,7 +21,7 @@ const movies = [
   {
     title: "The Godfather",
     overview: "Spanning the years 1945 to 1955, a",
-    poster_path: logo,
+    posterPath: logo,
     id: 238,
     release_date: "1972-03-14",
     vote_average: 8.7,
@@ -32,7 +32,7 @@ const movies = [
   {
     title: "The Dark Knight",
     overview: "Batman raises the stakes in his war",
-    poster_path: logo,
+    posterPath: logo,
     id: 155,
     release_date: "2008-07-16",
     vote_average: 8.5,
