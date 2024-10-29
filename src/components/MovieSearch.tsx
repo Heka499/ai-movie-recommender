@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Movie } from "@prisma/client";
+import MovieSearchCard from "./MovieSearchCard";
 
 export default function MovieSearch() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,7 +13,8 @@ export default function MovieSearch() {
     setSearchInProgress(true);
     const response = await fetch(`/api/tmdb/search?title=${searchTerm}`);
     const data = await response.json();
-    setSearchResults(data.results);
+    console.log(data);
+    setSearchResults(data.results.slice(0, 5));
     setSearchInProgress(false);
   }
 
@@ -28,10 +30,7 @@ export default function MovieSearch() {
       {searchResults && (
         <div>
           {searchResults.map((movie) => (
-            <div key={movie.id}>
-              <h2>{movie.title}</h2>
-              <p>{movie.overview}</p>
-            </div>
+            <MovieSearchCard movie={movie} key={movie.id} />
           ))}
         </div>
       )}
