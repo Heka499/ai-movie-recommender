@@ -14,12 +14,13 @@ export async function GET(req: NextRequest) {
       },
     };
 
-    fetch(url, options)
+    const result = await fetch(url, options)
       .then((res) => res.json())
-      .then((json) => console.log("tmdb:", json))
-      .catch((err) => console.error(err));
+      .then((data) => {
+        return data;
+      });
 
-    return Response.json({ results: [] });
+    return Response.json(result);
   } catch (error) {
     console.error(error);
     return Response.json({ error: "Internal server error" }, { status: 500 });
