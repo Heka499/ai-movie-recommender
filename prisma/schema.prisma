@@ -30,6 +30,7 @@ model Movie {
   title       String
   releaseDate DateTime
   posterPath  String
+  overview    String
 
   @@map("movies")
 }
