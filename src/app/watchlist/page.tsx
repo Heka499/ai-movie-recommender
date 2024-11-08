@@ -1,7 +1,7 @@
-import Note from "@/components/Note";
 import prisma from "@/lib/db/prisma";
 import { auth } from "@clerk/nextjs";
 import { Metadata } from "next";
+import MovieCard from "@/components/MovieCard";
 
 const getUserWatchlist = async () => {
   const { userId } = auth();
@@ -30,7 +30,7 @@ export default async function WatchlistPage() {
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {movies.map((movie) => (
-        <Note note={movie} key={movie.id} />
+        <MovieCard movie={movie} key={movie.id} />
       ))}
       {movies.length === 0 && (
         <div className="col-span-full text-center">

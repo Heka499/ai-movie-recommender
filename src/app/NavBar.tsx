@@ -33,6 +33,9 @@ export default function NavBar() {
             <Link href="/movies" className="flex items-center gap-1">
               <span>Movies</span>
             </Link>
+            <Link href="/watchlist" className="flex items-center gap-1">
+              <span>Watchlist</span>
+            </Link>
           </div>
           <div className="flex items-center gap-2">
             <UserButton
