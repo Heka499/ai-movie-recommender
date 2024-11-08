@@ -26,7 +26,7 @@ model Note {
 
 model Movie {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  movieId     String
+  movieId     Int     @unique
   title       String
   releaseDate DateTime
   posterPath  String
@@ -37,7 +37,7 @@ model Movie {
 
 model Watchlist {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId      String
+  userId      String  @unique
   movies      String[]
   
   @@map("watchlists")
