@@ -32,21 +32,23 @@ export async function POST(req: Request) {
       const watchlist = await prisma.watchlist.create({
         data: {
           userId: userId,
-          movies: [],
+          movieIds: [],
+          movieTitles: [],
         },
       });
 
       await prisma.watchlist.update({
         where: { userId: userId },
         data: {
-          movies: [...watchlist.movies, existingMovie.id],
+          movieIds: [...watchlist.movieIds, existingMovie.movieId],
+          movieTitles: [...watchlist.movieTitles, existingMovie.title],
         },
       });
 
       return Response.json({ watchlist }, { status: 201 });
     }
 
-    if (watchlist.movies.includes(existingMovie.id)) {
+    if (watchlist.movieIds.includes(existingMovie.movieId)) {
       return Response.json(
         { error: "Movie already in watchlist" },
         { status: 409 },
@@ -56,7 +58,8 @@ export async function POST(req: Request) {
     await prisma.watchlist.update({
       where: { userId: userId },
       data: {
-        movies: [...watchlist.movies, existingMovie.id],
+        movieIds: [...watchlist.movieIds, existingMovie.movieId],
+        movieTitles: [...watchlist.movieTitles, existingMovie.title],
       },
     });
 

@@ -6,18 +6,22 @@ import MovieCard from "@/components/MovieCard";
 const getUserWatchlist = async () => {
   const { userId } = auth();
 
+  if (!userId) {
+    return [];
+  }
+
   // Get the user's watchlist by userId
   const watchlist = await prisma.watchlist.findUnique({
     where: { userId: userId },
   });
 
   // If no watchlist is found, return an empty array
-  if (!watchlist || watchlist.movies.length === 0) return [];
+  if (!watchlist || watchlist.movieIds.length === 0) return [];
 
   // Fetch movie details for each movieId in the watchlist
   const movies = await prisma.movie.findMany({
     where: {
-      id: { in: watchlist.movies },
+      movieId: { in: watchlist.movieIds },
     },
   });
 

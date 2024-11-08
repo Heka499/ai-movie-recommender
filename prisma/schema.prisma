@@ -38,7 +38,8 @@ model Movie {
 model Watchlist {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   userId      String  @unique
-  movies      String[]
+  movieIds    Int[]
+  movieTitles String[]
   
   @@map("watchlists")
 }
