@@ -18,6 +18,7 @@ export default async function MoviesPage() {
 
   return (
     <>
+      <MovieSearch />
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {allMovies.map((movie) => (
           <MovieCard movie={movie} key={movie.id} />
@@ -26,7 +27,6 @@ export default async function MoviesPage() {
           <div className="col-span-full text-center">{"No movies found."}</div>
         )}
       </div>
-      <MovieSearch />
     </>
   );
 }
