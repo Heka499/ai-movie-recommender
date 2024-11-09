@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    console.log(body.movieId);
+    console.log("movieId:", body.movieId);
 
     const { movieId } = body;
 
