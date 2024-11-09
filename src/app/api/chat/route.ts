@@ -9,6 +9,19 @@ import {
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
 export async function POST(req: Request) {
+  async function addMovieToWatchlist(movieTitle: string) {
+    const response = await fetch("/api/tmdb/watchlist", {
+      method: "POST",
+      body: JSON.stringify({ movieTitle }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Status code: " + response.status);
+    }
+
+    return "Movie added to watchlist";
+  }
+
   try {
     const body = await req.json();
     const messages: ChatCompletionMessage[] = body.messages;
@@ -61,13 +74,33 @@ export async function POST(req: Request) {
         "Here are some notes that might help you answer the user's question: " +
         relevantNotes
           .map((note) => `Title: ${note.title}\n\nContent:\n${note.content}`)
-          .join("\n\n"),
+          .join("\n\n") +
+        ". You can ask the user if they want to add a movie to their watchlist using the `addMovieToWatchlist` function with the movie title.",
     };
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       stream: true,
       messages: [systemMessage, ...messagesTruncated],
+      /*
+      functions: [
+        {
+          name: "addMovieToWatchlist",
+          description: "Add a movie to the user's watchlist",
+          parameters: {
+            type: "object",
+            properties: {
+              movieTitle: {
+                type: "string",
+                description: "The title of the movie to add to the watchlist",
+              },
+            },
+            required: ["movieTitle"],
+          },
+        },
+      ],
+      function_call: "auto",
+      */
     });
 
     const stream = OpenAIStream(response);
