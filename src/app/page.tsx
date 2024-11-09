@@ -5,45 +5,14 @@ import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import MovieCard from "@/components/MovieCard";
+import prisma from "@/lib/db/prisma";
 
-const movies = [
-  {
-    title: "The Shawshank Redemption",
-    overview: "Framed in the 1940s for the",
-    posterPath: logo,
-    id: 278,
-    release_date: "1994-09-23",
-    vote_average: 8.7,
-    vote_count: 21035,
-    popularity: 48.7,
-    genre_ids: [18, 80],
-  },
-  {
-    title: "The Godfather",
-    overview: "Spanning the years 1945 to 1955, a",
-    posterPath: logo,
-    id: 238,
-    release_date: "1972-03-14",
-    vote_average: 8.7,
-    vote_count: 15898,
-    popularity: 48.7,
-    genre_ids: [18, 80],
-  },
-  {
-    title: "The Dark Knight",
-    overview: "Batman raises the stakes in his war",
-    posterPath: logo,
-    id: 155,
-    release_date: "2008-07-16",
-    vote_average: 8.5,
-    vote_count: 23947,
-    popularity: 48.7,
-    genre_ids: [18, 80],
-  },
-];
-
-export default function Home() {
+export default async function Home() {
   const { userId } = auth();
+
+  const dailyMovies = await prisma.movie.findMany();
+
+  const movies = dailyMovies.slice(0, 3);
 
   //if (userId) redirect("/notes");
 
