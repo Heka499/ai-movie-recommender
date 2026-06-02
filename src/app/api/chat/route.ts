@@ -69,7 +69,8 @@ export async function POST(req: Request) {
       functions: [
         {
           name: "addMovieToWatchlist",
-          description: "Add a movie to the user's watchlist",
+          description:
+            "Add a movie to the user's watchlist. After calling this function, the movie will be added to the user's watchlist. You can confirm the movie was added by checking the watchlist.",
           parameters: {
             type: "object",
             properties: {
@@ -87,14 +88,11 @@ export async function POST(req: Request) {
 
     const [response1, response2] = response.tee();
 
-    console.log("Response:", response1);
-
     let movieAdded = false;
-    console.log("movieAdded:", movieAdded);
+
     let accumulatedArguments = "";
 
     for await (const part of response1) {
-      console.log("Part:", part);
       if (part.choices && part.choices[0].delta) {
         const delta = part.choices[0].delta;
 
@@ -111,9 +109,8 @@ export async function POST(req: Request) {
             try {
               const { movieTitle } = JSON.parse(accumulatedArguments);
               addMovieToWatchlist(movieTitle);
-              console.log("Movie added to watchlist:", movieTitle);
+
               movieAdded = true;
-              console.log("movieAdded:", movieAdded);
             } catch (error) {
               console.error(error);
             }
